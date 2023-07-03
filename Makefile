@@ -13,22 +13,22 @@ build.all:
 	@go mod download && GOOS=windows GOARCH=amd64 go build -o capten-windows.exe cmd/main.go
 
 .PHONY: build.release
-build.release: build.all
+build.release:
 	@echo "👷👷 Building release ..."
 	@mkdir release
 	@mkdir release/config release/cert release/terraform_modules release/apps release/templates
 
 	# move binaries and configs
-	@mv capten-* release
+	# @mv capten-* release
 	@cp -rf config/* release/config/
 
 	# move templates
 	@cp -rf templates/* release/templates/
 
 	# git pull dataplane repo, versioning needs to be confirmed
-	@git clone https://github.com/kube-tarian/controlplane-dataplane.git
-	@cp -rf controlplane-dataplane/* release/terraform_modules/
-	@rm -rf controlplane-dataplane
+	# @git clone https://github.com/kube-tarian/controlplane-dataplane.git
+	# @cp -rf controlplane-dataplane/* release/terraform_modules/
+	# @rm -rf controlplane-dataplane
 
 	# move apps
 	@mkdir release/apps/values
@@ -37,5 +37,7 @@ build.release: build.all
 	# copy readme
 	@cp README.md release/README.md
 
-	@zip -r artifacts.zip release
+	@zip -r capten.zip release
+	# remove this release folder as ci pipeline is complaining
+	@rm -rf release
 	@echo "✅ Release Build Complete ✅"
