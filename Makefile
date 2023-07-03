@@ -37,5 +37,5 @@ build.release: build.all
 	# copy readme
 	@cp README.md release/README.md
 
-	@zip -r capten.zip release
+	@zip -r artifacts.zip release
 	@echo "✅ Release Build Complete ✅"
