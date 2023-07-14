@@ -10,9 +10,9 @@ build.all:
 	@echo "👷👷 Building Capten CLIs"
 	@rm -rf capten
 	@mkdir capten
-	@go mod download && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -o capten/capten cmd/main.go
+	# @go mod download && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -o capten/capten cmd/main.go
 	@go mod download && GOOS=darwin GOARCH=amd64 go build -o capten/capten.app cmd/main.go
-	@go mod download && GOOS=windows GOARCH=amd64 go build -o capten/capten.exe cmd/main.go
+	# @go mod download && GOOS=windows GOARCH=amd64 go build -o capten/capten.exe cmd/main.go
 
 .PHONY: build.release
 build.release: build.all
